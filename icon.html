@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تغيير أيقونة التطبيق - خبر عاجل</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1E88E5;
+            --secondary-color: #FFC107;
+            --text-color: #333333;
+            --bg-color: #F5F5F5;
+            --card-bg: #FFFFFF;
+            --header-bg: rgba(255, 255, 255, 0.95);
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        .dark-mode {
+            --primary-color: #64B5F6;
+            --secondary-color: #FFD54F;
+            --text-color: #E0E0E0;
+            --bg-color: #121212;
+            --card-bg: #1E1E1E;
+            --header-bg: rgba(30, 30, 30, 0.95);
+            --shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: var(--transition);
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding-top: 80px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: var(--header-bg);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-left: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link i {
+            margin-left: 0.5rem;
+        }
+
+        .nav-link:hover {
+            background-color: var(--primary-color);
+            color: var(--card-bg);
+        }
+
+        .lang-toggle {
+            background-color: #FFFFFF;
+            color: #333333;
+            border: 1px solid #CCCCCC;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .lang-toggle:hover {
+            background-color: #F0F0F0;
+        }
+
+        .lang-toggle i {
+            margin-left: 0.5rem;
+        }
+
+        .mode-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .mode-toggle:hover {
+            color: var(--primary-color);
+        }
+
+        main {
+            padding: 2rem 0;
+        }
+
+        .icon-guide {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .warning {
+            background-color: #FFF3CD;
+            border: 1px solid #FFEEBA;
+            color: #856404;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+
+        .steps {
+            list-style-type: none;
+            counter-reset: step-counter;
+            padding-right: 2rem;
+        }
+
+        .steps li {
+            counter-increment: step-counter;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .steps li::before {
+            content: counter(step-counter);
+            position: absolute;
+            right: -2rem;
+            top: 0;
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: bold;
+            padding: 0.2rem 0.7rem;
+            border-radius: 50%;
+        }
+
+        .code-block {
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 1rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        h1, h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            margin-top: 2rem;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-newspaper"></i>
+                <span id="logoText">خبر عاجل</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html#features" class="nav-link">
+                    <i class="fas fa-star"></i>
+                    <span id="featuresLink">المميزات</span>
+                </a>
+                <a href="index.html#docs" class="nav-link">
+                    <i class="fas fa-book"></i>
+                    <span id="docsLink">الوثائق</span>
+                </a>
+                <a href="index.html#faq" class="nav-link">
+                    <i class="fas fa-question-circle"></i>
+                    <span id="faqLink">الأسئلة الشائعة</span>
+                </a>
+                <button class="lang-toggle" onclick="toggleLanguage()">
+                    <i class="fas fa-language"></i>
+                    <span id="langText">English</span>
+                </button>
+                <button class="mode-toggle" onclick="toggleDarkMode()">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="icon-guide">
+            <h1 id="pageTitle">تغيير أيقونة التطبيق</h1>
+            
+            <div class="warning">
+                <strong id="warningTitle">تنبيه:</strong> <span id="warningText">تأكد من أن الأيقونة الجديدة تتوافق مع إرشادات التصميم لـ Android و iOS لضمان مظهر احترافي لتطبيقك.</span>
+            </div>
+
+            <h2 id="instructionsTitle">خطوات تغيير أيقونة التطبيق:</h2>
+            <ol class="steps">
+                <li id="step1">قم بتحضير الأيقونة الجديدة بأحجام مختلفة (مثل 48x48، 72x72، 96x96، 144x144، 192x192 بكسل).</li>
+                <li id="step2">افتح مشروع Android Studio الخاص بك.</li>
+                <li id="step3">انتقل إلى مجلد res في هيكل المشروع.</li>
+                <li id="step4">استبدل الملفات الموجودة في المجلدات mipmap-* بالأيقونات الجديدة.</li>
+                <li id="step5">إذا كنت تستخدم أيقونة تكيفية، قم بتحديث ملف ic_launcher.xml في مجلد mipmap-anydpi-v26.</li>
+                <li id="step6">تحقق من ملف AndroidManifest.xml للتأكد من أن android:icon يشير إلى الأيقونة الصحيحة.</li>
+                <li id="step7">قم بتشغيل التطبيق للتحقق من ظهور الأيقونة الجديدة بشكل صحيح.</li>
+            </ol>
+
+            <h2 id="codeExampleTitle">مثال على التعديل في ملف AndroidManifest.xml:</h2>
+            <div class="code-block">
+                <pre><code>&lt;application
+    android:icon="@mipmap/ic_launcher"
+    android:roundIcon="@mipmap/ic_launcher_round"
+    ...&gt;
+    &lt;!-- باقي محتوى الملف --&gt;
+&lt;/application&gt;</code></pre>
+            </div>
+
+            <p id="noteText">ملاحظة: تأكد من توفير أيقونات بدقة عالية لجميع أحجام الشاشات المدعومة لضمان جودة العرض على جميع الأجهزة.</p>
+
+            <h2 id="videoTitle">فيديو توضيحي:</h2>
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/dummyVideoID" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const translations = {
+            ar: {
+                logoText: "خبر عاجل",
+                featuresLink: "المميزات",
+                docsLink: "الوثائق",
+                faqLink: "الأسئلة الشائعة",
+                langText: "English",
+                pageTitle: "تغيير أيقونة التطبيق",
+                warningTitle: "تنبيه:",
+                warningText: "تأكد من أن الأيقونة الجديدة تتوافق مع إرشادات التصميم لـ Android و iOS لضمان مظهر احترافي لتطبيقك.",
+                instructionsTitle: "خطوات تغيير أيقونة التطبيق:",
+                step1: "قم بتحضير الأيقونة الجديدة بأحجام مختلفة (مثل 48x48، 72x72، 96x96، 144x144، 192x192 بكسل).",
+                step2: "افتح مشروع Android Studio الخاص بك.",
+                step3: "انتقل إلى مجلد res في هيكل المشروع.",
+                step4: "استبدل الملفات الموجودة في المجلدات mipmap-* بالأيقونات الجديدة.",
+                step5: "إذا كنت تستخدم أيقونة تكيفية، قم بتحديث ملف ic_launcher.xml في مجلد mipmap-anydpi-v26.",
+                step6: "تحقق من ملف AndroidManifest.xml للتأكد من أن android:icon يشير إلى الأيقونة الصحيحة.",
+                step7: "قم بتشغيل التطبيق للتحقق من ظهور الأيقونة الجديدة بشكل صحيح.",
+                codeExampleTitle: "مثال على التعديل في ملف AndroidManifest.xml:",
+                noteText: "ملاحظة: تأكد من توفير أيقونات بدقة عالية لجميع أحجام الشاشات المدعومة لضمان جودة العرض على جميع الأجهزة.",
+                videoTitle: "فيديو توضيحي:"
+            },
+            en: {
+                logoText: "Breaking News",
+                featuresLink: "Features",
+                docsLink: "Docs",
+                faqLink: "FAQ",
+                langText: "العربية",
+                pageTitle: "Change App Icon",
+                warningTitle: "Warning:",
+                warningText: "Ensure that the new icon complies with Android and iOS design guidelines to maintain a professional look for your app.",
+                instructionsTitle: "Steps to change the app icon:",
+                step1: "Prepare the new icon in various sizes (e.g., 48x48, 72x72, 96x96, 144x144, 192x192 pixels).",
+                step2: "Open your Android Studio project.",
+                step3: "Navigate to the res folder in the project structure.",
+                step4: "Replace the existing files in the mipmap-* folders with your new icons.",
+                step5: "If using an adaptive icon, update the ic_launcher.xml file in the mipmap-anydpi-v26 folder.",
+                step6: "Check the AndroidManifest.xml file to ensure android:icon points to the correct icon.",
+                
+                step7: "Run the app to verify that the new icon appears correctly.",
+                codeExampleTitle: "Example modification in AndroidManifest.xml file:",
+                noteText: "Note: Make sure to provide high-resolution icons for all supported screen sizes to ensure quality display across all devices.",
+                videoTitle: "Instructional Video:"
+            }
+        };
+
+        let currentLanguage = 'ar';
+
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'ar' ? 'en' : 'ar';
+            updateContent();
+            document.documentElement.lang = currentLanguage;
+            document.documentElement.dir = currentLanguage === 'ar' ? 'rtl' : 'ltr';
+        }
+
+        function updateContent() {
+            const elements = document.querySelectorAll('[id]');
+            elements.forEach(el => {
+                if (translations[currentLanguage][el.id]) {
+                    el.textContent = translations[currentLanguage][el.id];
+                }
+            });
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const icon = document.querySelector('.mode-toggle i');
+            icon.classList.toggle('fa-moon');
+            icon.classList.toggle('fa-sun');
+        }
+
+        // Initialize content
+        updateContent();
+    </script>
+</body>
+</html>
