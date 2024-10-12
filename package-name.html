@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="دليل تغيير اسم الحزمة لتطبيق خبر عاجل">
+    <title>تغيير اسم الحزمة - تطبيق خبر عاجل</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Roboto:wght@400;700&display=swap');
+
+        :root {
+            --primary-color: #2196F3;
+            --secondary-color: #FFC107;
+            --text-color: #333;
+            --bg-color: #f0f0f0;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Cairo', 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            transition: background-color 0.3s ease;
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+
+        .top-bar {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 10px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .top-bar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+            text-decoration: none;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover, .nav-link:focus {
+            color: var(--secondary-color);
+            outline: none;
+        }
+
+        .language-select {
+            position: relative;
+        }
+
+        .language-btn {
+            background-color: transparent;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 1em;
+            padding: 5px 10px;
+        }
+
+        .language-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background-color: white;
+            border-radius: 4px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .language-dropdown a {
+            color: var(--text-color);
+            display: block;
+            padding: 10px 20px;
+            text-decoration: none;
+        }
+
+        .language-dropdown a:hover, .language-dropdown a:focus {
+            background-color: var(--bg-color);
+            outline: none;
+        }
+
+        .support-btn {
+            background-color: var(--secondary-color);
+            color: var(--text-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .support-btn:hover, .support-btn:focus {
+            background-color: #FFA000;
+            transform: translateY(-2px);
+            outline: none;
+        }
+
+        .content {
+            max-width: 800px;
+            margin: 100px auto 40px;
+            padding: 40px;
+            background-color: var(--card-bg);
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .content h1 {
+            color: var(--primary-color);
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            text-align: center;
+        }
+
+        .package-steps {
+            counter-reset: step;
+            padding-left: 0;
+        }
+
+        .package-step {
+            list-style-type: none;
+            position: relative;
+            padding-left: 60px;
+            margin-bottom: 30px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .package-step::before {
+            content: counter(step);
+            counter-increment: step;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 40px;
+            height: 40px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .package-step h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+        }
+
+        .package-step p {
+            line-height: 1.6;
+        }
+
+        .package-step.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .video-container {
+            margin-top: 40px;
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @media (max-width: 768px) {
+            .content {
+                padding: 20px;
+            }
+
+            .package-step {
+                padding-left: 50px;
+            }
+
+            .package-step::before {
+                width: 30px;
+                height: 30px;
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="top-bar" aria-label="القائمة الرئيسية">
+        <div class="top-bar-content">
+            <a href="index.html" class="logo" id="logoText">خبر عاجل</a>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link" id="homeLink">الرئيسية</a>
+                <a href="install.html" class="nav-link" id="installLink">التثبيت</a>
+                <a href="package-name.html" class="nav-link" id="packageLink">اسم الحزمة</a>
+                <a href="logo.html" class="nav-link" id="logoLink">الشعار</a>
+            </div>
+            <div class="language-select">
+                <button class="language-btn" id="languageBtn" aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-globe"></i>
+                    <span class="sr-only">تغيير اللغة</span>
+                </button>
+                <div class="language-dropdown" id="languageDropdown" role="menu">
+                    <a href="#" onclick="setLanguage('ar')" role="menuitem">العربية</a>
+                    <a href="#" onclick="setLanguage('en')" role="menuitem">English</a>
+                </div>
+            </div>
+            <a href="#" class="support-btn" id="supportBtn">
+                <i class="fas fa-headset"></i>
+                <span id="supportText">الدعم الفني</span>
+            </a>
+        </div>
+    </nav>
+
+    <main class="content">
+        <h1 id="packageTitle">تغيير اسم الحزمة</h1>
+        <ol class="package-steps" id="packageSteps">
+            <li class="package-step">
+                <h3>افتح Android Studio</h3>
+                <p>قم بفتح مشروع تطبيق خبر عاجل في Android Studio.</p>
+            </li>
+            <li class="package-step">
+                <h3>انتقل إلى ملف build.gradle</h3>
+                <p>في هيكل المشروع، ابحث عن ملف build.gradle (Module: app) وافتحه.</p>
+            </li>
+            <li class="package-step">
+                <h3>تعديل applicationId</h3>
+                <p>في ملف build.gradle، ابحث عن السطر الذي يحتوي على applicationId وقم بتغييره إلى اسم الحزمة الجديد الذي تريده.</p>
+            </li>
+            <li class="package-step">
+                <h3>تحديث AndroidManifest.xml</h3>
+                <p>افتح ملف AndroidManifest.xml وقم بتحديث خاصية package في العنصر الجذر manifest إلى اسم الحزمة الجديد.</p>
+            </li>
+            <li class="package-step">
+                <h3>تحديث مراجع الحزمة</h3>
+                <p>قم بتحديث جميع مراجع الحزمة في ملفات المصدر الخاصة بك (مثل الأنشطة والخدمات) لتعكس اسم الحزمة الجديد.</p>
+            </li>
+            <li class="package-step">
+                <h3>إعادة بناء المشروع</h3>
+                <p>انقر على "Build" > "Rebuild Project" لإعادة بناء المشروع بالتغييرات الجديدة.</p>
+            </li>
+            <li class="package-step">
+                <h3>اختبار التطبيق</h3>
+                <p>قم بتشغيل الت
+طبيق للتأكد من أن كل شيء يعمل بشكل صحيح مع اسم الحزمة الجديد.</p>
+            </li>
+        </ol>
+        <div class="video-container">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/b2fgH4UtZ44" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+    </main>
+
+    <script>
+        const translations = {
+            ar: {
+                logoText: "خبر عاجل",
+                homeLink: "الرئيسية",
+                installLink: "التثبيت",
+                packageLink: "اسم الحزمة",
+                logoLink: "الشعار",
+                supportText: "الدعم الفني",
+                packageTitle: "تغيير اسم الحزمة",
+                packageSteps: [
+                    {
+                        title: "افتح Android Studio",
+                        description: "قم بفتح مشروع تطبيق خبر عاجل في Android Studio."
+                    },
+                    {
+                        title: "انتقل إلى ملف build.gradle",
+                        description: "في هيكل المشروع، ابحث عن ملف build.gradle (Module: app) وافتحه."
+                    },
+                    {
+                        title: "تعديل applicationId",
+                        description: "في ملف build.gradle، ابحث عن السطر الذي يحتوي على applicationId وقم بتغييره إلى اسم الحزمة الجديد الذي تريده."
+                    },
+                    {
+                        title: "تحديث AndroidManifest.xml",
+                        description: "افتح ملف AndroidManifest.xml وقم بتحديث خاصية package في العنصر الجذر manifest إلى اسم الحزمة الجديد."
+                    },
+                    {
+                        title: "تحديث مراجع الحزمة",
+                        description: "قم بتحديث جميع مراجع الحزمة في ملفات المصدر الخاصة بك (مثل الأنشطة والخدمات) لتعكس اسم الحزمة الجديد."
+                    },
+                    {
+                        title: "إعادة بناء المشروع",
+                        description: 'انقر على "Build" > "Rebuild Project" لإعادة بناء المشروع بالتغييرات الجديدة.'
+                    },
+                    {
+                        title: "اختبار التطبيق",
+                        description: "قم بتشغيل التطبيق للتأكد من أن كل شيء يعمل بشكل صحيح مع اسم الحزمة الجديد."
+                    }
+                ]
+            },
+            en: {
+                logoText: "Breaking News",
+                homeLink: "Home",
+                installLink: "Installation",
+                packageLink: "Package Name",
+                logoLink: "Logo",
+                supportText: "Support",
+                packageTitle: "Change Package Name",
+                packageSteps: [
+                    {
+                        title: "Open Android Studio",
+                        description: "Open the Breaking News app project in Android Studio."
+                    },
+                    {
+                        title: "Navigate to build.gradle",
+                        description: "In the project structure, locate and open the build.gradle (Module: app) file."
+                    },
+                    {
+                        title: "Modify applicationId",
+                        description: "In the build.gradle file, find the line containing applicationId and change it to your desired new package name."
+                    },
+                    {
+                        title: "Update AndroidManifest.xml",
+                        description: "Open the AndroidManifest.xml file and update the package attribute in the root manifest element to the new package name."
+                    },
+                    {
+                        title: "Update Package References",
+                        description: "Update all package references in your source files (like activities and services) to reflect the new package name."
+                    },
+                    {
+                        title: "Rebuild the Project",
+                        description: 'Click on "Build" > "Rebuild Project" to rebuild the project with the new changes.'
+                    },
+                    {
+                        title: "Test the App",
+                        description: "Run the app to ensure everything works correctly with the new package name."
+                    }
+                ]
+            }
+        };
+
+        function setLanguage(lang) {
+            document.documentElement.lang = lang;
+            document.body.style.direction = lang === 'ar' ? 'rtl' : 'ltr';
+            
+            for (const [key, value] of Object.entries(translations[lang])) {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.textContent = value;
+                }
+            }
+
+            const steps = document.getElementById('packageSteps');
+            steps.innerHTML = '';
+            translations[lang].packageSteps.forEach((step, index) => {
+                const li = document.createElement('li');
+                li.className = 'package-step';
+                li.innerHTML = `<h3>${step.title}</h3><p>${step.description}</p>`;
+                steps.appendChild(li);
+            });
+
+            animateSteps();
+
+            localStorage.setItem('selectedLanguage', lang);
+        }
+
+        const languageBtn = document.getElementById('languageBtn');
+        const languageDropdown = document.getElementById('languageDropdown');
+
+        languageBtn.addEventListener('click', () => {
+            const expanded = languageBtn.getAttribute('aria-expanded') === 'true' || false;
+            languageBtn.setAttribute('aria-expanded', !expanded);
+            languageDropdown.style.display = expanded ? 'none' : 'block';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (!languageBtn.contains(e.target)) {
+                languageDropdown.style.display = 'none';
+                languageBtn.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        function animateSteps() {
+            const steps = document.querySelectorAll('.package-step');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.5 });
+
+            steps.forEach(step => {
+                observer.observe(step);
+            });
+        }
+
+        window.addEventListener('load', () => {
+            const savedLanguage = localStorage.getItem('selectedLanguage') || 'ar';
+            setLanguage(savedLanguage);
+            animateSteps();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && languageDropdown.style.display === 'block') {
+                languageDropdown.style.display = 'none';
+                languageBtn.setAttribute('aria-expanded', 'false');
+                languageBtn.focus();
+            }
+        });
+    </script>
+</body>
+</html>
