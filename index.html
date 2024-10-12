@@ -567,6 +567,168 @@
         .pulse {
             animation: pulse 2s infinite;
         }
+        @keyframes slideInFromBottom {
+    0% {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.download-app {
+    margin: 4rem 0;
+    padding: 0 20px;
+    animation: slideInFromBottom 0.8s ease-out forwards;
+}
+
+.download-container {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    border-radius: 20px;
+    padding: 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    position: relative;
+}
+
+.download-container::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 80%);
+    transform: rotate(30deg);
+}
+
+.download-content {
+    flex: 1;
+    text-align: right;
+}
+
+.download-title {
+    font-size: 2.5rem;
+    color: #ffffff;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+}
+
+.download-desc {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 1.5rem;
+    max-width: 500px;
+}
+
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    background-color: #ffffff;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.download-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, transparent, rgba(255,255,255,0.5), transparent);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.download-btn:hover::before {
+    transform: translateX(100%);
+}
+
+.download-btn:hover {
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    background-color: #f8f8f8;
+}
+
+.download-btn i {
+    margin-right: 10px;
+    font-size: 1.4rem;
+    transition: transform 0.3s ease;
+}
+
+.download-btn:hover i {
+    transform: translateX(5px) rotate(15deg);
+}
+
+html[lang="en"] .download-container {
+    flex-direction: row-reverse;
+}
+
+html[lang="en"] .download-content {
+    text-align: left;
+}
+
+html[lang="en"] .download-btn i {
+    margin-right: 0;
+    margin-left: 10px;
+}
+
+html[lang="en"] .download-btn:hover i {
+    transform: translateX(-5px) rotate(-15deg);
+}
+
+@media (max-width: 768px) {
+    .download-container {
+        flex-direction: column;
+        text-align: center;
+        padding: 2rem;
+    }
+
+    .download-content {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .download-title {
+        font-size: 2rem;
+    }
+
+    .download-desc {
+        font-size: 1rem;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .download-btn {
+        font-size: 1rem;
+        padding: 0.8rem 1.5rem;
+    }
+
+    html[lang="en"] .download-container {
+        flex-direction: column;
+    }
+
+    html[lang="en"] .download-content {
+        text-align: center;
+    }
+}
     </style>
 </head>
 <body>
@@ -616,7 +778,18 @@
             <h1 id="mainTitle">وثائق تطبيق خبر عاجل</h1>
             <p class="subtitle" id="subtitle">دليلك الشامل لاستخدام وتخصيص تطبيق خبر عاجل</p>
         </section>
-
+        <section id="download-app" class="download-app">
+            <div class="download-container">
+                <div class="download-content">
+                    <h2 id="downloadTitle" class="download-title">جرب تطبيقنا الآن</h2>
+                    <p id="downloadDesc" class="download-desc">احصل على تجربة إخبارية فريدة مع تطبيق خبر عاجل</p>
+                </div>
+                <button id="downloadBtn" class="download-btn" onclick="downloadApp()">
+                    <span id="downloadText">تحميل التطبيق التجريبي</span>
+                    <i class="fas fa-download"></i>
+                </button>
+            </div>
+        </section>
         <section id="features" class="features">
             <div class="feature">
                 <i class="fas fa-bolt feature-icon"></i>
@@ -756,9 +929,15 @@
                 privacyLink: "سياسة الخصوصية",
                 termsLink: "الشروط والأحكام",
                 contactLink: "اتصل بنا",
-                showMore: "عرض المزيد"
+                showMore: "عرض المزيد",
+                downloadTitle: "جرب تطبيقنا الآن",
+        downloadText: "تحميل التطبيق التجريبي",
+        downloadDesc: "احصل على تجربة إخبارية فريدة مع تطبيق خبر عاجل"
             },
             en: {
+                downloadTitle: "Try Our App Now",
+        downloadText: "Download Trial App",
+        downloadDesc: "Get a unique news experience with the Breaking News app",
                 installTitle: "Installation Instructions",
     installDesc: "Steps to install and start using the app",
     installMoreBtn: "Show More",
