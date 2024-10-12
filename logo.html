@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مولد الكود - خبر عاجل</title>
+    <title>تغيير أيقونة التطبيق - خبر عاجل</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css" rel="stylesheet" />
     <style>
         :root {
             --primary-color: #1E88E5;
@@ -17,7 +16,6 @@
             --header-bg: rgba(255, 255, 255, 0.95);
             --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             --transition: all 0.3s ease;
-            --border-color: #E0E0E0;
         }
 
         .dark-mode {
@@ -28,7 +26,6 @@
             --card-bg: #1E1E1E;
             --header-bg: rgba(30, 30, 30, 0.95);
             --shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
-            --border-color: #424242;
         }
 
         * {
@@ -61,11 +58,6 @@
             z-index: 1000;
             box-shadow: var(--shadow);
             backdrop-filter: blur(10px);
-            transition: transform 0.3s ease;
-        }
-
-        header.hide {
-            transform: translateY(-100%);
         }
 
         nav {
@@ -87,10 +79,6 @@
 
         .logo i {
             margin-left: 0.5rem;
-        }
-
-        .logo:hover {
-            transform: scale(1.05);
         }
 
         .nav-links {
@@ -117,13 +105,12 @@
         .nav-link:hover {
             background-color: var(--primary-color);
             color: var(--card-bg);
-            transform: translateY(-2px);
         }
 
-        .lang-toggle, .mode-toggle {
-            background-color: var(--card-bg);
-            color: var(--text-color);
-            border: 1px solid var(--border-color);
+        .lang-toggle {
+            background-color: #FFFFFF;
+            color: #333333;
+            border: 1px solid #CCCCCC;
             padding: 0.5rem 1rem;
             border-radius: 5px;
             cursor: pointer;
@@ -133,41 +120,79 @@
             transition: var(--transition);
         }
 
-        .lang-toggle:hover, .mode-toggle:hover {
-            background-color: var(--primary-color);
-            color: var(--card-bg);
+        .lang-toggle:hover {
+            background-color: #F0F0F0;
         }
 
-        .lang-toggle i, .mode-toggle i {
+        .lang-toggle i {
             margin-left: 0.5rem;
         }
 
-        .menu-toggle {
-            display: none;
+        .mode-toggle {
             background: none;
             border: none;
             color: var(--text-color);
             font-size: 1.5rem;
             cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .mode-toggle:hover {
+            color: var(--primary-color);
         }
 
         main {
             padding: 2rem 0;
         }
 
-        .card {
+        .icon-guide {
             background-color: var(--card-bg);
             border-radius: 10px;
             padding: 2rem;
-            box-shadow: var(--shadow);
             margin-bottom: 2rem;
-            border: 1px solid var(--border-color);
-            animation: fadeIn 0.5s ease-out;
+            box-shadow: var(--shadow);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
+        .warning {
+            background-color: #FFF3CD;
+            border: 1px solid #FFEEBA;
+            color: #856404;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+
+        .steps {
+            list-style-type: none;
+            counter-reset: step-counter;
+            padding-right: 2rem;
+        }
+
+        .steps li {
+            counter-increment: step-counter;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .steps li::before {
+            content: counter(step-counter);
+            position: absolute;
+            right: -2rem;
+            top: 0;
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: bold;
+            padding: 0.2rem 0.7rem;
+            border-radius: 50%;
+        }
+
+        .code-block {
+            background-color: #f4f4f4;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            padding: 1rem;
+            margin: 1rem 0;
+            overflow-x: auto;
         }
 
         h1, h2 {
@@ -175,172 +200,13 @@
             margin-bottom: 1rem;
         }
 
-        h1 { font-size: 2rem; }
-        h2 { font-size: 1.5rem; }
-
-        form {
-            display: grid;
-            gap: 1rem;
-        }
-
-        .form-group {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        label {
-            font-weight: 600;
-            color: var(--text-color);
-            flex: 1;
-        }
-
-        input, select {
-            flex: 2;
-            padding: 0.5rem;
-            border: 1px solid var(--border-color);
-            border-radius: 5px;
-            background-color: var(--card-bg);
-            color: var(--text-color);
-            transition: var(--transition);
-        }
-
-        input:focus, select:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 2px var(--primary-color);
-            animation: pulse 0.5s ease-out;
-        }
-
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 var(--primary-color); }
-            70% { box-shadow: 0 0 0 10px rgba(0, 0, 0, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(0, 0, 0, 0); }
-        }
-
-        input[type="color"] {
-            width: 50px;
-            height: 50px;
-            padding: 0;
-            border: none;
-            cursor: pointer;
-        }
-
-        .color-preview {
-            width: 50px;
-            height: 50px;
-            border-radius: 5px;
-            margin-right: 1rem;
-            border: 1px solid var(--border-color);
-        }
-
-        button {
-            background-color: var(--primary-color);
-            color: #FFFFFF;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: var(--transition);
-        }
-
-        button:hover {
-            background-color: var(--secondary-color);
-            color: var(--text-color);
-            transform: translateY(-2px);
-        }
-
-        .code-wrapper {
-            background-color: #2d2d2d;
-            border-radius: 5px;
-            padding: 1rem;
-            margin-top: 1rem;
-            position: relative;
-            direction: ltr;
-            text-align: left;
-            border: 1px solid var(--border-color);
-        }
-
-        #generatedCode {
-            white-space: pre-wrap;
-            font-family: 'Courier New', monospace;
-            color: #f8f8f2;
-        }
-
-        .copy-btn {
-            position: absolute;
-            top: 0.5rem;
-            right: 0.5rem;
-            background-color: var(--primary-color);
-            color: #FFFFFF;
-            border: none;
-            padding: 0.25rem 0.5rem;
-            border-radius: 3px;
-            cursor: pointer;
-            font-size: 0.8rem;
-        }
-
-        .copy-btn:hover {
-            background-color: var(--secondary-color);
-            color: var(--text-color);
-        }
-
-        .notification {
-            background: linear-gradient(to right, #1E88E5, #5E35B1);
-            color: #FFFFFF;
-            padding: 1rem;
-            margin-bottom: 2rem;
-            border-radius: 10px;
-            box-shadow: var(--shadow);
-            animation: slideIn 0.5s ease-out;
-        }
-
-        @keyframes slideIn {
-            from { transform: translateX(-100%); }
-            to { transform: translateX(0); }
-        }
-
-        .notification-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .notification-text {
-            flex-grow: 1;
-        }
-
-        .notification-actions {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .notification-btn {
-            background-color: rgba(255, 255, 255, 0.2);
-            color: #FFFFFF;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: var(--transition);
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .notification-btn:hover {
-            background-color: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
-        }
-
         .video-container {
             position: relative;
-            padding-bottom: 56.25%;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
             height: 0;
             overflow: hidden;
-            margin-top: 1rem;
+            max-width: 100%;
+            margin-top: 2rem;
         }
 
         .video-container iframe {
@@ -351,158 +217,38 @@
             height: 100%;
         }
 
-        .alert {
-            background-color: #FFF3CD;
-            border: 1px solid #FFEEBA;
-            color: #856404;
-            padding: 15px;
-            border-radius: 5px;
-            margin-top: 20px;
-            font-size: 14px;
-            line-height: 1.5;
-            animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
-        }
-
-        @keyframes shake {
-            10%, 90% { transform: translate3d(-1px, 0, 0); }
-            20%, 80% { transform: translate3d(2px, 0, 0); }
-            30%, 50%, 70% { transform: translate3d(-4px, 0, 0); }
-            40%, 60% { transform: translate3d(4px, 0, 0); }
-        }
-
-        .alert i {
-            margin-left: 10px;
-            font-size: 18px;
-        }
-
-        .info-icon {
-            cursor: pointer;
-            color: var(--primary-color);
-            font-size: 1.2rem;
-            margin-right: 0.5rem;
-        }
-
-        .popup {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1001;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .popup-content {
-            background-color: var(--card-bg);
-            padding: 2rem;
-            border-radius: 10px;
-            max-width: 80%;
-            max-height: 80%;
-            overflow: auto;
-            position: relative;
-            animation: zoomIn 0.3s ease-out;
-        }
-
-        @keyframes zoomIn {
-            from { transform: scale(0.5); opacity: 0; }
-            to { transform: scale(1); opacity: 1; }
-        }
-
-        .popup-close {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--text-color);
-        }
-
-        .popup img {
-            max-width: 100%;
-            height: auto;
-        }
-
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background-color: var(--header-bg);
-                padding: 1rem;
-                box-shadow: var(--shadow);
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .menu-toggle {
-                display: block;
-            }
-
-            .card {
-                padding: 1rem;
-            }
-
-            h1 { font-size: 1.5rem; }
-            h2 { font-size: 1.2rem; }
-
-            .form-group {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            label, input, select {
-                width: 100%;
-            }
-
-            .notification-content {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 1rem;
-            }
-
-            .notification-actions {
-                width: 100%;
-                justify-content: space-between;
             }
         }
     </style>
 </head>
 <body>
-    <header id="header">
+    <header>
         <nav class="container">
-            <a href="#" class="logo" id="logo">
+            <a href="index.html" class="logo">
                 <i class="fas fa-newspaper"></i>
                 <span id="logoText">خبر عاجل</span>
             </a>
-            <button class="menu-toggle" id="menuToggle">
-                <i class="fas fa-bars"></i>
-            </button>
-            <div class="nav-links" id="navLinks">
-                <a href="/index.html" class="nav-link" id="homeLink">
-                    <i class="fas fa-home"></i>
-                    <span>الرئيسية</span>
+            <div class="nav-links">
+                <a href="index.html#features" class="nav-link">
+                    <i class="fas fa-star"></i>
+                    <span id="featuresLink">المميزات</span>
                 </a>
-                <a href="#" class="nav-link" id="docsLink">
+                <a href="index.html#docs" class="nav-link">
                     <i class="fas fa-book"></i>
-                    <span>الوثائق</span>
+                    <span id="docsLink">الوثائق</span>
                 </a>
-                <a href="#" class="nav-link" id="faqLink">
+                <a href="index.html#faq" class="nav-link">
                     <i class="fas fa-question-circle"></i>
-                    <span>الأسئلة الشائعة</span>
+                    <span id="faqLink">الأسئلة الشائعة</span>
                 </a>
-                <button class="lang-toggle" onclick="toggleLanguage()" id="langToggle">
+                <button class="lang-toggle" onclick="toggleLanguage()">
                     <i class="fas fa-language"></i>
                     <span id="langText">English</span>
                 </button>
-                <button class="mode-toggle" onclick="toggleDarkMode()" id="modeToggle">
+                <button class="mode-toggle" onclick="toggleDarkMode()">
                     <i class="fas fa-moon"></i>
                 </button>
             </div>
@@ -510,1070 +256,117 @@
     </header>
 
     <main class="container">
-        <div class="notification" id="notification">
-            <div class="notification-content">
-                <div class="notification-text">
-                    <h3 id="notificationTitle">إشعار هام</h3>
-                    <p id="notificationText">يتم نسخ الكود بعد التعديل إلى app/src/main/java/com/turbo/breakingnews/AppStrings.kt</p>
-                </div>
-                <div class="notification-actions">
-                    <button class="notification-btn" id="watchVideoBtn">
-                        <i class="fas fa-play-circle"></i>
-                        <span id="watchVideoText">شاهد الفيديو</span>
-                    </button>
-                    <button class="notification-btn" id="closeNotificationBtn">
-                        <i class="fas fa-times"></i>
-                        <span id="closeNotificationText">إغلاق</span>
-                    </button>
-                </div>
+        <section class="icon-guide">
+            <h1 id="pageTitle">تغيير أيقونة التطبيق</h1>
+            
+            <div class="warning">
+                <strong id="warningTitle">تنبيه:</strong> <span id="warningText">تأكد من أن الأيقونة الجديدة تتوافق مع إرشادات التصميم لـ Android و iOS لضمان مظهر احترافي لتطبيقك.</span>
             </div>
-            <div class="video-container" id="videoContainer" style="display: none;">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
+            <h2 id="instructionsTitle">خطوات تغيير أيقونة التطبيق:</h2>
+            <ol class="steps">
+                <li id="step1">قم بتحضير الأيقونة الجديدة بأحجام مختلفة (مثل 48x48، 72x72، 96x96، 144x144، 192x192 بكسل).</li>
+                <li id="step2">افتح مشروع Android Studio الخاص بك.</li>
+                <li id="step3">انتقل إلى مجلد res في هيكل المشروع.</li>
+                <li id="step4">استبدل الملفات الموجودة في المجلدات mipmap-* بالأيقونات الجديدة.</li>
+                <li id="step5">إذا كنت تستخدم أيقونة تكيفية، قم بتحديث ملف ic_launcher.xml في مجلد mipmap-anydpi-v26.</li>
+                <li id="step6">تحقق من ملف AndroidManifest.xml للتأكد من أن android:icon يشير إلى الأيقونة الصحيحة.</li>
+                <li id="step7">قم بتشغيل التطبيق للتحقق من ظهور الأيقونة الجديدة بشكل صحيح.</li>
+            </ol>
+
+            <h2 id="codeExampleTitle">مثال على التعديل في ملف AndroidManifest.xml:</h2>
+            <div class="code-block">
+                <pre><code>&lt;application
+    android:icon="@mipmap/ic_launcher"
+    android:roundIcon="@mipmap/ic_launcher_round"
+    ...&gt;
+    &lt;!-- باقي محتوى الملف --&gt;
+&lt;/application&gt;</code></pre>
             </div>
-        </div>
 
-        <div class="card">
-            <h1 id="mainTitle">مولد الكود</h1>
+            <p id="noteText">ملاحظة: تأكد من توفير أيقونات بدقة عالية لجميع أحجام الشاشات المدعومة لضمان جودة العرض على جميع الأجهزة.</p>
 
-            <form id="codeForm">
-                
-                <h2 id="packageTitle">حزمة التطبيق</h2>
-                <div class="form-group">
-                    <label for="packageName" id="packageNameLabel">اسم الحزمة الحالي:</label>
-                    <input type="text" id="packageName" name="packageName" value="com.turbo.breakingnews" readonly>
-                    <i class="fas fa-info-circle info-icon" data-field="newPackageName"></i>
-                </div>
-                <div class="form-group">
-                    <label for="newPackageName" id="newPackageNameLabel">اسم الحزمة الجديد:</label>
-                    <input type="text" id="newPackageName" name="newPackageName" placeholder="com.yourcompany.appname">
-                    <i class="fas fa-info-circle info-icon" data-field="fieldName"></i>
-                </div>
-                <div class="alert">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    <strong id="alertTitle">تنبيه مهم:</strong> <span id="alertContent">تغيير اسم الحزمة سيؤثر على تشغيل التطبيق. تأكد من تحديث جميع الأماكن التي تستخدم اسم الحزمة في الكود الخاص بك لضمان عمل التطبيق بشكل صحيح.</span>
-                </div>
-                <h2 id="mainTextsTitle">النصوص الرئيسية</h2>
-                <div class="form-group">
-                    <label for="appTitle" id="appTitleLabel">عنوان التطبيق:</label>
-                    <input type="text" id="appTitle" name="appTitle" value="خبر عاجل" required>
-                    <i class="fas fa-info-circle info-icon" onclick="showPopup('appTitle')"></i>
-                </div>
-                <div class="form-group">
-                    <label for="search" id="searchLabel">نص البحث:</label>
-                    <input type="text" id="search" name="search" value="بحث" required>
-                    <i class="fas fa-info-circle info-icon" onclick="showPopup('search')"></i>
-                </div>
-                <div class="form-group">
-                    <label for="alJazeera" id="alJazeeraLabel">الجزيرة:</label>
-                    <input type="text" id="alJazeera" name="alJazeera" value="الجزيره" required>
-                    <i class="fas fa-info-circle info-icon" onclick="showPopup('alJazeera')"></i>
-                </div>
-                <div class="form-group">
-                    <label for="egyptNews" id="egyptNewsLabel">مصر الإخبارية:</label>
-                    <input type="text" id="egyptNews" name="egyptNews" value="مصر الاخباريه" required>
-                    <i class="fas fa-info-circle info-icon" onclick="showPopup('egyptNews')"></i>
-                </div>
-                <div class="form-group">
-                    <label for="skyNews" id="skyNewsLabel">سكاي نيوز:</label>
-                    <input type="text" id="skyNews" name="skyNews" value="سكاي نيوز" required>
-                    <i class="fas fa-info-circle info-icon" onclick="showPopup('skyNews')"></i>
-                </div>
-                <div class="form-group">
-                    <label for="scrollToTop" id="scrollToTopLabel">الصعود إلى الأعلى:</label>
-                    <input type="text" id="scrollToTop" name="scrollToTop" value="الصعود إلى الأعلى" required>
-                    <i class="fas fa-info-circle info-icon" onclick="showPopup('scrollToTop')"></i>
-                </div>
-                <h2 id="permissionScreenTitle">شاشة الأذونات</h2>
-                <div class="form-group">
-                    <label for="permissionRequired" id="permissionRequiredLabel">الإذن مطلوب:</label>
-                    <input type="text" id="permissionRequired" name="permissionRequired" value="الإذن مطلوب" required>
-                    <i class="fas fa-info-circle info-icon" onclick="showPopup('permissionRequired')"></i>
-                </div>
-                <div class="form-group">
-                    <label for="needYourPermission" id="needYourPermissionLabel">نحتاج إلى إذنك:</label>
-                    <input type="text" id="needYourPermission" name="needYourPermission" value="نحتاج إلى إذنك" required>
-                    <i class="fas fa-info-circle info-icon" onclick="showPopup('needYourPermission')"></i>
-                </div>
-                <div class="form-group">
-                    <label for="canYouHelp" id="canYouHelpLabel">هل يمكنك المساعدة؟:</label>
-                    <input type="text" id="canYouHelp" name="canYouHelp" value="هل يمكنك المساعدة؟" required>
-                    <i class="fas fa-info-circle info-icon" onclick="showPopup('canYouHelp')"></i>
-                </div>
-                <div class="form-group">
-                    <label for="permissionGrantedText" id="permissionGrantedTextLabel">تم منح الإذن!:</label>
-                    <input type="text" id="permissionGrantedText" name="permissionGrantedText" value="تم منح الإذن!" required>
-                    <i class="fas fa-info-circle info-icon" onclick="showPopup('permissionGrantedText')"></i>
-                </div>
-                <div class="form-group">
-                    <label for="thankYouRedirecting" id="thankYouRedirectingLabel">شكرًا لمنح الإذن. جارٍ التوجيه إلى الصفحة الرئيسية...:</label>
-                    <input type="text" id="thankYouRedirecting" name="thankYouRedirecting" value="شكرًا لمنح الإذن. جارٍ التوجيه إلى الصفحة الرئيسية..." required>
-                    <i class="fas fa-info-circle info-icon" onclick="showPopup('thankYouRedirecting')"></i>
-                </div>
-                <div class="form-group">
-                    <label for="permissionExplanation" id="permissionExplanationLabel">نحتاج إلى إذن للعرض فوق التطبيقات الأخرى للحصول على أفضل تجربة.:</label>
-                    <input type="text" id="permissionExplanation" name="permissionExplanation" value="نحتاج إلى إذن للعرض فوق التطبيقات الأخرى للحصول على أفضل تجربة." required>
-                    <i class="fas fa-info-circle info-icon" onclick="showPopup('permissionExplanation')"></i>
-                </div>
-                <div class="form-group">
-                    <label for="grantPermission" id="grantPermissionLabel">منح الإذن:</label>
-                    <input type="text" id="grantPermission" name="grantPermission" value="منح الإذن" required>
-                    <i class="fas fa-info-circle info-icon" onclick="showPopup('grantPermission')"></i>
-                </div>
-                
-                <h2 id="newsCardsTitle">بطاقات الأخبار</h2>
-                <div class="form-group">
-                    <label for="removeFromFavorites" id="removeFromFavoritesLabel">إزالة من المفضلة:</label>
-                    <input type="text" id="removeFromFavorites" name="removeFromFavorites" value="إزالة من المفضلة" required>
-                    <i class="fas fa-info-circle info-icon" onclick="showPopup('removeFromFavorites')"></i>
-                </div>
-                <div class="form-group">
-                    <label for="addToFavorites" id="addToFavoritesLabel">إضافة للمفضلة:</label>
-                    <input type="text" id="addToFavorites" name="addToFavorites" value="إضافة للمفضلة" required>
-                    <i class="fas fa-info-circle info-icon" onclick="showPopup('addToFavorites')"></i>
-                </div>
-                <div class="form-group">
-                    <label for="share" id="shareLabel">مشاركة:</label>
-                    <input type="text" id="share" name="share" value="مشاركة" required>
-                    <i class="fas fa-info-circle info-icon" onclick="showPopup('share')"></i>
-                </div>
-                
-                <h2 id="notificationsTitle">الإشعارات</h2>
-                <div class="form-group">
-                    <label for="loadingNews" id="loadingNewsLabel">جاري تحميل الأخبار...:</label>
-                    <input type="text" id="loadingNews" name="loadingNews" value="جاري تحميل الأخبار..." required>
-                    <i class="fas fa-info-circle info-icon" onclick="showPopup('loadingNews')"></i>
-                </div>
-                
-                <h2 id="newsSourcesTitle">مصادر الأخبار</h2>
-                <div class="form-group">
-                    <label for="alJazeeraSource" id="alJazeeraSourceLabel">المصدر الجزيرة مباشر:</label>
-                    <input type="text" id="alJazeeraSource" name="alJazeeraSource" value="المصدر الجزيرة مباشر" required>
-                    <i class="fas fa-info-circle info-icon" onclick="showPopup('alJazeeraSource')"></i>
-                </div>
-                <div class="form-group">
-                    <label for="skyNewsSource" id="skyNewsSourceLabel">المصدر Sky News:</label>
-                    <input type="text" id="skyNewsSource" name="skyNewsSource" value="المصدر Sky News" required>
-                    <i class="fas fa-info-circle info-icon" onclick="showPopup('skyNewsSource')"></i>
-                </div>
-                <h2 id="settingsTitle">الإعدادات</h2>
-                <div class="form-group">
-                    <label for="settings" id="settingsLabel">الإعدادات:</label>
-                    <input type="text" id="settings" name="settings" value="الإعدادات" required>
-                    <i class="fas fa-info-circle info-icon" onclick="showPopup('settings')"></i>
-                </div>
-                <div class="form-group">
-                    <label for="horizontalLayout" id="horizontalLayoutLabel">عرض أفقي:</label>
-                    <input type="text" id="horizontalLayout" name="horizontalLayout" value="عرض أفقي" required>
-                    <i class="fas fa-info-circle info-icon" onclick="showPopup('horizontalLayout')"></i>
-                </div>
-                <div class="form-group">
-                    <label for="verticalLayout" id="verticalLayoutLabel">عرض عمودي:</label>
-                    <input type="text" id="verticalLayout" name="verticalLayout" value="عرض عمودي" required>
-                    <i class="fas fa-info-circle info-icon" onclick="showPopup('verticalLayout')"></i>
-                </div>
-                <div class="form-group">
-                    <label for="fontSize" id="fontSizeLabel">حجم الخط:</label>
-                    <input type="text" id="fontSize" name="fontSize" value="حجم الخط" required>
-                    <i class="fas fa-info-circle info-icon" onclick="showPopup('fontSize')"></i>
-                </div>
-                <div class="form-group">
-                    <label for="enableNotifications" id="enableNotificationsLabel">تفعيل الإشعارات:</label>
-                    <input type="text" id="enableNotifications" name="enableNotifications" value="تفعيل الإشعارات" required>
-                    <i class="fas fa-info-circle info-icon" onclick="showPopup('enableNotifications')"></i>
-                </div>
-                <div class="form-group">
-                    <label for="darkMode" id="darkModeLabel">الوضع الليلي:</label>
-                    <input type="text" id="darkMode" name="darkMode" value="الوضع الليلي" required>
-                    <i class="fas fa-info-circle info-icon" onclick="showPopup('darkMode')"></i>
-                </div>
-                <div class="form-group">
-                    <label for="lightMode" id="lightModeLabel">الوضع النهاري:</label>
-                    <input type="text" id="lightMode" name="lightMode" value="الوضع النهاري" required>
-                    <i class="fas fa-info-circle info-icon" onclick="showPopup('lightMode')"></i>
-                </div>
-                
-                <h2 id="colorsTitle">الألوان</h2>
-                <h3 id="lightModeColorsTitle">ألوان الوضع النهاري</h3>
-                <div class="form-group">
-                    <label for="primaryColor" id="primaryColorLabel">اللون الأساسي:</label>
-                    <input type="color" id="primaryColor" name="primaryColor" value="#1E88E5">
-                    <div id="primaryColorPreview" class="color-preview"></div>
-                    <i class="fas fa-info-circle info-icon" onclick="showPopup('primaryColor')"></i>
-                </div>
-                <div class="form-group">
-                    <label for="secondaryColor" id="secondaryColorLabel">اللون الثانوي:</label>
-                    <input type="color" id="secondaryColor" name="secondaryColor" value="#FFC107">
-                    <div id="secondaryColorPreview" class="color-preview"></div>
-                    <i class="fas fa-info-circle info-icon" onclick="showPopup('secondaryColor')"></i>
-                </div>
-                <div class="form-group">
-                    <label for="backgroundColor" id="backgroundColorLabel">لون الخلفية:</label>
-                    <input type="color" id="backgroundColor" name="backgroundColor" value="#F5F5F5">
-                    <div id="backgroundColorPreview" class="color-preview"></div>
-                    <i class="fas fa-info-circle info-icon" onclick="showPopup('backgroundColor')"></i>
-                </div>
-                <div class="form-group">
-                    <label for="surfaceColor" id="surfaceColorLabel">لون السطح:</label>
-                    <input type="color" id="surfaceColor" name="surfaceColor" value="#FFFFFF">
-                    <div id="surfaceColorPreview" class="color-preview"></div>
-                    <i class="fas fa-info-circle info-icon" onclick="showPopup('surfaceColor')"></i>
-                </div>
-                <div class="form-group">
-                    <label for="onPrimaryColor" id="onPrimaryColorLabel">لون النص على الأساسي:</label>
-                    <input type="color" id="onPrimaryColor" name="onPrimaryColor" value="#FFFFFF">
-                    <div id="onPrimaryColorPreview" class="color-preview"></div>
-                    <i class="fas fa-info-circle info-icon" onclick="showPopup('onPrimaryColor')"></i>
-                </div>
-                <div class="form-group">
-                    <label for="onSecondaryColor" id="onSecondaryColorLabel">لون النص على الثانوي:</label>
-                    <input type="color" id="onSecondaryColor" name="onSecondaryColor" value="#000000">
-                    <div id="onSecondaryColorPreview" class="color-preview"></div>
-                    <i class="fas fa-info-circle info-icon" onclick="showPopup('onSecondaryColor')"></i>
-                </div>
-                <div class="form-group">
-                    <label for="onBackgroundColor" id="onBackgroundColorLabel">لون النص على الخلفية:</label>
-                    <input type="color" id="onBackgroundColor" name="onBackgroundColor" value="#000000">
-                    <div id="onBackgroundColorPreview" class="color-preview"></div>
-                    <i class="fas fa-info-circle info-icon" onclick="showPopup('onBackgroundColor')"></i>
-                </div>
-                <div class="form-group">
-                    <label for="onSurfaceColor" id="onSurfaceColorLabel">لون النص على السطح:</label>
-                    <input type="color" id="onSurfaceColor" name="onSurfaceColor" value="#000000">
-                    <div id="onSurfaceColorPreview" class="color-preview"></div>
-                    <i class="fas fa-info-circle info-icon" onclick="showPopup('onSurfaceColor')"></i>
-                </div>
-                <h3 id="darkModeColorsTitle">ألوان الوضع الليلي</h3>
-                <div class="form-group">
-                    <label for="darkBackgroundColor" id="darkBackgroundColorLabel">لون الخلفية الليلي:</label>
-                    <input type="color" id="darkBackgroundColor" name="darkBackgroundColor" value="#121212">
-                    <div id="darkBackgroundColorPreview" class="color-preview"></div>
-                    <i class="fas fa-info-circle info-icon" onclick="showPopup('darkBackgroundColor')"></i>
-                </div>
-                <div class="form-group">
-                    <label for="darkSurfaceColor" id="darkSurfaceColorLabel">لون السطح الليلي:</label>
-                    <input type="color" id="darkSurfaceColor" name="darkSurfaceColor" value="#1E1E1E">
-                    <div id="darkSurfaceColorPreview" class="color-preview"></div>
-                    <i class="fas fa-info-circle info-icon" onclick="showPopup('darkSurfaceColor')"></i>
-                </div>
-                <div class="form-group">
-                    <label for="darkPrimaryColor" id="darkPrimaryColorLabel">اللون الأساسي الليلي:</label>
-                    <input type="color" id="darkPrimaryColor" name="darkPrimaryColor" value="#64B5F6">
-                    <div id="darkPrimaryColorPreview" class="color-preview"></div>
-                    <i class="fas fa-info-circle info-icon" onclick="showPopup('darkPrimaryColor')"></i>
-                </div>
-                <div class="form-group">
-                    <label for="darkSecondaryColor" id="darkSecondaryColorLabel">اللون الثانوي الليلي:</label>
-                    <input type="color" id="darkSecondaryColor" name="darkSecondaryColor" value="#FFD54F">
-                    <div id="darkSecondaryColorPreview" class="color-preview"></div>
-                    <i class="fas fa-info-circle info-icon" onclick="showPopup('darkSecondaryColor')"></i>
-                </div>
-                
-                <button type="submit" id="generateBtn">توليد الكود</button>
-            </form>
-        </div>
-
-        <div class="card">
-            <h2 id="generatedCodeTitle">الكود المولد</h2>
-            <div class="code-wrapper">
-                <pre><code id="generatedCode" class="language-kotlin"></code></pre>
-                <button class="copy-btn" id="copyBtn">نسخ</button>
+            <h2 id="videoTitle">فيديو توضيحي:</h2>
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/dummyVideoID" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
-        </div>
+        </section>
     </main>
 
-    <div class="popup" id="popup">
-        <div class="popup-content">
-            <span class="popup-close" onclick="closePopup()">&times;</span>
-            <h2 id="popupTitle"></h2>
-            <p id="popupDescription"></p>
-            <img id="popupImage" src="" alt="" style="display: none;">
-        </div>
-    </div>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-kotlin.min.js"></script>
     <script>
         const translations = {
             ar: {
                 logoText: "خبر عاجل",
-                homeLink: "الرئيسية",
+                featuresLink: "المميزات",
                 docsLink: "الوثائق",
                 faqLink: "الأسئلة الشائعة",
                 langText: "English",
-                mainTitle: "مولد الكود",
-                packageTitle: "حزمة التطبيق",
-                packageNameLabel: "اسم الحزمة الحالي:",
-                newPackageNameLabel: "اسم الحزمة الجديد:",
-                alertTitle: "تنبيه مهم:",
-                alertContent: "تغيير اسم الحزمة سيؤثر على تشغيل التطبيق. تأكد من تحديث جميع الأماكن التي تستخدم اسم الحزمة في الكود الخاص بك لضمان عمل التطبيق بشكل صحيح.",
-                mainTextsTitle: "النصوص الرئيسية",
-                appTitleLabel: "عنوان التطبيق:",
-                searchLabel: "نص البحث:",
-                alJazeeraLabel: "الجزيرة:",
-                egyptNewsLabel: "مصر الإخبارية:",
-                skyNewsLabel: "سكاي نيوز:",
-                scrollToTopLabel: "الصعود إلى الأعلى:",
-                permissionScreenTitle: "شاشة الأذونات",
-                permissionRequiredLabel: "الإذن مطلوب:",
-                needYourPermissionLabel: "نحتاج إلى إذنك:",
-                canYouHelpLabel: "هل يمكنك المساعدة؟:",
-                permissionGrantedTextLabel: "تم منح الإذن!:",
-                thankYouRedirectingLabel: "شكرًا لمنح الإذن. جارٍ التوجيه إلى الصفحة الرئيسية...:",
-                permissionExplanationLabel: "نحتاج إلى إذن للعرض فوق التطبيقات الأخرى للحصول على أفضل تجربة.:",
-                grantPermissionLabel: "منح الإذن:",
-                newsCardsTitle: "بطاقات الأخبار",
-                removeFromFavoritesLabel: "إزالة من المفضلة:",
-                addToFavoritesLabel: "إضافة للمفضلة:",
-                shareLabel: "مشاركة:",
-                notificationsTitle: "الإشعارات",
-                loadingNewsLabel: "جاري تحميل الأخبار...:",
-                newsSourcesTitle: "مصادر الأخبار",
-                alJazeeraSourceLabel: "المصدر الجزيرة مباشر:",
-                skyNewsSourceLabel: "المصدر Sky News:",
-                settingsTitle: "الإعدادات",
-                settingsLabel: "الإعدادات:",
-                horizontalLayoutLabel: "عرض أفقي:",
-                verticalLayoutLabel: "عرض عمودي:",
-                fontSizeLabel: "حجم الخط:",
-                enableNotificationsLabel: "تفعيل الإشعارات:",
-                darkModeLabel: "الوضع الليلي:",
-                lightModeLabel: "الوضع النهاري:",
-                colorsTitle: "الألوان",
-                lightModeColorsTitle: "ألوان الوضع النهاري",
-                primaryColorLabel: "اللون الأساسي:",
-                secondaryColorLabel: "اللون الثانوي:",
-                backgroundColorLabel: "لون الخلفية:",
-                surfaceColorLabel: "لون السطح:",
-                onPrimaryColorLabel: "لون النص على الأساسي:",
-                onSecondaryColorLabel: "لون النص على الثانوي:",
-                onBackgroundColorLabel: "لون النص على الخلفية:",
-                onSurfaceColorLabel: "لون النص على السطح:",
-                darkModeColorsTitle: "ألوان الوضع الليلي",
-                darkBackgroundColorLabel: "لون الخلفية الليلي:",
-                darkSurfaceColorLabel: "لون السطح الليلي:",
-                darkPrimaryColorLabel: "اللون الأساسي الليلي:",
-                darkSecondaryColorLabel: "اللون الثانوي الليلي:",
-                generateBtn: "توليد الكود",
-                generatedCodeTitle: "الكود المولد",
-                copyBtn: "نسخ",
-                notificationTitle: "إشعار هام",
-                notificationText: "يتم نسخ الكود بعد التعديل إلى app/src/main/java/com/turbo/breakingnews/AppStrings.kt",
-                watchVideoText: "شاهد الفيديو",
-                closeNotificationText: "إغلاق"
+                pageTitle: "تغيير أيقونة التطبيق",
+                warningTitle: "تنبيه:",
+                warningText: "تأكد من أن الأيقونة الجديدة تتوافق مع إرشادات التصميم لـ Android و iOS لضمان مظهر احترافي لتطبيقك.",
+                instructionsTitle: "خطوات تغيير أيقونة التطبيق:",
+                step1: "قم بتحضير الأيقونة الجديدة بأحجام مختلفة (مثل 48x48، 72x72، 96x96، 144x144، 192x192 بكسل).",
+                step2: "افتح مشروع Android Studio الخاص بك.",
+                step3: "انتقل إلى مجلد res في هيكل المشروع.",
+                step4: "استبدل الملفات الموجودة في المجلدات mipmap-* بالأيقونات الجديدة.",
+                step5: "إذا كنت تستخدم أيقونة تكيفية، قم بتحديث ملف ic_launcher.xml في مجلد mipmap-anydpi-v26.",
+                step6: "تحقق من ملف AndroidManifest.xml للتأكد من أن android:icon يشير إلى الأيقونة الصحيحة.",
+                step7: "قم بتشغيل التطبيق للتحقق من ظهور الأيقونة الجديدة بشكل صحيح.",
+                codeExampleTitle: "مثال على التعديل في ملف AndroidManifest.xml:",
+                noteText: "ملاحظة: تأكد من توفير أيقونات بدقة عالية لجميع أحجام الشاشات المدعومة لضمان جودة العرض على جميع الأجهزة.",
+                videoTitle: "فيديو توضيحي:"
             },
             en: {
                 logoText: "Breaking News",
-                homeLink: "Home",
+                featuresLink: "Features",
                 docsLink: "Docs",
                 faqLink: "FAQ",
                 langText: "العربية",
-                mainTitle: "Code Generator",
-                packageTitle: "Application Package",
-                packageNameLabel: "Current Package Name:",
-                newPackageNameLabel: "New Package Name:",
-                alertTitle: "Important Alert:",
-                alertContent: "Changing the package name will affect the application's functionality. Make sure to update all places that use the package name in your code to ensure the application works correctly.",
-                mainTextsTitle: "Main Texts",
-                appTitleLabel: "App Title:",
-                searchLabel: "Search Text:",
-                alJazeeraLabel: "Al Jazeera:",
-                egyptNewsLabel: "Egypt News:",
-                skyNewsLabel: "Sky News:",
-                scrollToTopLabel: "Scroll to Top:",
-                permissionScreenTitle: "Permission Screen",
-                permissionRequiredLabel: "Permission Required:",
-                needYourPermissionLabel: "We Need Your Permission:",
-                canYouHelpLabel: "Can You Help?:",
-                permissionGrantedTextLabel: "Permission Granted!:",
-                thankYouRedirectingLabel: "Thank you for granting permission. Redirecting to home page...:",
-                permissionExplanationLabel: "We need permission to display over other apps for the best experience.:",
-                grantPermissionLabel: "Grant Permission:",
-                newsCardsTitle: "News Cards",
-                removeFromFavoritesLabel: "Remove from Favorites:",
-                addToFavoritesLabel: "Add to Favorites:",
-                shareLabel: "Share:",
-                notificationsTitle: "Notifications",
-                loadingNewsLabel: "Loading News...:",
-                newsSourcesTitle: "News Sources",
-                alJazeeraSourceLabel: "Source Al Jazeera Live:",
-                skyNewsSourceLabel: "Source Sky News:",
-                settingsTitle: "Settings",
-                settingsLabel: "Settings:",
-                horizontalLayoutLabel: "Horizontal Layout:",
-                verticalLayoutLabel: "Vertical Layout:",
-                fontSizeLabel: "Font Size:",
-                enableNotificationsLabel: "Enable Notifications:",
-                darkModeLabel: "Dark Mode:",
-                lightModeLabel: "Light Mode:",
-                colorsTitle: "Colors",
-                lightModeColorsTitle: "Light Mode Colors",
-                primaryColorLabel: "Primary Color:",
-                secondaryColorLabel: "Secondary Color:",
-                backgroundColorLabel: "Background Color:",
-                surfaceColorLabel: "Surface Color:",
-                onPrimaryColorLabel: "On Primary Color:",
-                onSecondaryColorLabel: "On Secondary Color:",
-                onBackgroundColorLabel: "On Background Color:",
-                onSurfaceColorLabel: "On Surface Color:",
-                darkModeColorsTitle: "Dark Mode Colors",
-                darkBackgroundColorLabel: "Dark Background Color:",
-                darkSurfaceColorLabel: "Dark Surface Color:",
-                darkPrimaryColorLabel: "Dark Primary Color:",
-                darkSecondaryColorLabel: "Dark Secondary Color:",
-                generateBtn: "Generate Code",
-                generatedCodeTitle: "Generated Code",
-                copyBtn: "Copy",
-                notificationTitle: "Important Notice",
-                notificationText: "The code is copied after modification to app/src/main/java/com/turbo/breakingnews/AppStrings.kt",
-                watchVideoText: "Watch Video",
-                closeNotificationText: "Close"
+                pageTitle: "Change App Icon",
+                warningTitle: "Warning:",
+                warningText: "Ensure that the new icon complies with Android and iOS design guidelines to maintain a professional look for your app.",
+                instructionsTitle: "Steps to change the app icon:",
+                step1: "Prepare the new icon in various sizes (e.g., 48x48, 72x72, 96x96, 144x144, 192x192 pixels).",
+                step2: "Open your Android Studio project.",
+                step3: "Navigate to the res folder in the project structure.",
+                step4: "Replace the existing files in the mipmap-* folders with your new icons.",
+                step5: "If using an adaptive icon, update the ic_launcher.xml file in the mipmap-anydpi-v26 folder.",
+                step6: "Check the AndroidManifest.xml file to ensure android:icon points to the correct icon.",
+                
+                step7: "Run the app to verify that the new icon appears correctly.",
+                codeExampleTitle: "Example modification in AndroidManifest.xml file:",
+                noteText: "Note: Make sure to provide high-resolution icons for all supported screen sizes to ensure quality display across all devices.",
+                videoTitle: "Instructional Video:"
             }
         };
 
-        const fieldInfo = {
-  packageName: {
-    title: {
-      ar: "اسم الحزمة الحالي",
-      en: "Current Package Name"
-    },
-    description: {
-      ar: "هذا هو اسم الحزمة الحالي لتطبيقك. يتم استخدامه لتعريف تطبيقك بشكل فريد في نظام Android.",
-      en: "This is the current package name of your application. It's used to uniquely identify your app in the Android ecosystem."
-    },
-    image: "/images/package-name-example.png"
-  },
-  newPackageName: {
-    title: {
-      ar: "اسم الحزمة الجديد",
-      en: "New Package Name"
-    },
-    description: {
-      ar: "أدخل اسم الحزمة الجديد لتطبيقك. يجب أن يكون فريدًا ويتبع تدوين اسم النطاق العكسي (مثل com.yourcompany.appname).",
-      en: "Enter the new package name for your application. It should be unique and follow the reverse domain name notation (e.g., com.yourcompany.appname)."
-    },
-    image: "/images/new-package-name-example.png"
-  },
-  appTitle: {
-    title: {
-      ar: "عنوان التطبيق",
-      en: "App Title"
-    },
-    description: {
-      ar: "هذا هو العنوان الرئيسي لتطبيقك الذي سيتم عرضه في شريط التطبيق وأماكن بارزة أخرى.",
-      en: "This is the main title of your application that will be displayed in the app bar and other prominent places."
-    },
-    image: "/images/app-title-example.png"
-  },
-  search: {
-    title: {
-      ar: "نص البحث",
-      en: "Search Text"
-    },
-    description: {
-      ar: "سيتم استخدام هذا النص كنص توضيحي أو تسمية لوظيفة البحث في تطبيقك.",
-      en: "This text will be used as a placeholder or label for search functionality in your app."
-    },
-    image: "/images/search-example.png"
-  },
-  alJazeera: {
-    title: {
-      ar: "الجزيرة",
-      en: "Al Jazeera"
-    },
-    description: {
-      ar: "النص المستخدم لتمثيل مصدر أخبار الجزيرة في تطبيقك.",
-      en: "The text to be used for representing Al Jazeera news source in your app."
-    },
-    image: "/images/al-jazeera-example.png"
-  },
-  egyptNews: {
-    title: {
-      ar: "مصر الإخبارية",
-      en: "Egypt News"
-    },
-    description: {
-      ar: "النص المستخدم لتمثيل مصدر أخبار مصر في تطبيقك.",
-      en: "The text to be used for representing Egypt News source in your app."
-    },
-    image: "/images/egypt-news-example.png"
-  },
-  skyNews: {
-    title: {
-      ar: "سكاي نيوز",
-      en: "Sky News"
-    },
-    description: {
-      ar: "النص المستخدم لتمثيل مصدر أخبار سكاي نيوز في تطبيقك.",
-      en: "The text to be used for representing Sky News source in your app."
-    },
-    image: "/images/sky-news-example.png"
-  },
-  scrollToTop: {
-    title: {
-      ar: "التمرير إلى الأعلى",
-      en: "Scroll to Top"
-    },
-    description: {
-      ar: "النص الخاص بإجراء التمرير مرة أخرى إلى أعلى الصفحة أو القائمة.",
-      en: "The text for the action to scroll back to the top of the page or list."
-    },
-    image: "/images/scroll-to-top-example.png"
-  },
-  permissionRequired: {
-    title: {
-      ar: "الإذن مطلوب",
-      en: "Permission Required"
-    },
-    description: {
-      ar: "نص العنوان لمربع حوار طلب الإذن.",
-      en: "The title text for the permission request dialog."
-    },
-    image: "/images/permission-required-example.png"
-  },
-  needYourPermission: {
-    title: {
-      ar: "نحتاج إلى إذنك",
-      en: "We Need Your Permission"
-    },
-    description: {
-      ar: "نص الشرح لسبب حاجة التطبيق إلى إذن المستخدم.",
-      en: "Explanation text for why the app needs user permission."
-    },
-    image: "/images/need-your-permission-example.png"
-  },
-  canYouHelp: {
-    title: {
-      ar: "هل يمكنك المساعدة؟",
-      en: "Can You Help?"
-    },
-    description: {
-      ar: "طريقة ودية لطلب مساعدة المستخدم في منح الأذونات.",
-      en: "A friendly way to ask for user's help in granting permissions."
-    },
-    image: "/images/can-you-help-example.png"
-  },
-  permissionGrantedText: {
-    title: {
-      ar: "تم منح الإذن!",
-      en: "Permission Granted!"
-    },
-    description: {
-      ar: "نص التأكيد الذي يظهر عندما يمنح المستخدم الإذن المطلوب.",
-      en: "Confirmation text shown when the user grants the requested permission."
-    },
-    image: "/images/permission-granted-example.png"
-  },
-  thankYouRedirecting: {
-    title: {
-      ar: "شكرًا لك، جارٍ إعادة التوجيه",
-      en: "Thank You, Redirecting"
-    },
-    description: {
-      ar: "الرسالة التي تظهر بعد منح الإذن، مشيرة إلى أنه سيتم إعادة توجيه المستخدم.",
-      en: "Message shown after permission is granted, indicating that the user will be redirected."
-    },
-    image: "/images/thank-you-redirecting-example.png"
-  },
-  permissionExplanation: {
-    title: {
-      ar: "شرح الإذن",
-      en: "Permission Explanation"
-    },
-    description: {
-      ar: "شرح مفصل لسبب حاجة التطبيق إلى الإذن المطلوب.",
-      en: "Detailed explanation of why the app needs the requested permission."
-    },
-    image: "/images/permission-explanation-example.png"
-  },
-  grantPermission: {
-    title: {
-      ar: "منح الإذن",
-      en: "Grant Permission"
-    },
-    description: {
-      ar: "النص الخاص بالزر الذي ينقر عليه المستخدم لمنح الإذن المطلوب.",
-      en: "Text for the button that the user taps to grant the requested permission."
-    },
-    image: "/images/grant-permission-example.png"
-  },
-  removeFromFavorites: {
-    title: {
-      ar: "إزالة من المفضلة",
-      en: "Remove from Favorites"
-    },
-    description: {
-      ar: "النص الخاص بإجراء إزالة عنصر من المفضلة.",
-      en: "Text for the action to remove an item from favorites."
-    },
-    image: "/images/remove-from-favorites-example.png"
-  },
-  addToFavorites: {
-    title: {
-      ar: "إضافة إلى المفضلة",
-      en: "Add to Favorites"
-    },
-    description: {
-      ar: "النص الخاص بإجراء إضافة عنصر إلى المفضلة.",
-      en: "Text for the action to add an item to favorites."
-    },
-    image: "/images/add-to-favorites-example.png"
-  },
-  share: {
-    title: {
-      ar: "مشاركة",
-      en: "Share"
-    },
-    description: {
-      ar: "النص الخاص بإجراء المشاركة، يستخدم عند مشاركة المقالات الإخبارية أو المحتوى الآخر.",
-      en: "Text for the share action, used when sharing news articles or other content."
-    },
-    image: "/images/share-example.png"
-  },
-  loadingNews: {
-    title: {
-      ar: "جارٍ تحميل الأخبار",
-      en: "Loading News"
-    },
-    description: {
-      ar: "النص الذي يظهر أثناء تحميل المقالات الإخبارية.",
-      en: "Text shown while news articles are being loaded."
-    },
-    image: "/images/loading-news-example.png"
-  },
-  alJazeeraSource: {
-    title: {
-      ar: "مصدر الجزيرة",
-      en: "Al Jazeera Source"
-    },
-    description: {
-      ar: "النص الذي يشير إلى أن مصدر الخبر هو الجزيرة.",
-      en: "Text indicating that the news source is Al Jazeera."
-    },
-    image: "/images/al-jazeera-source-example.png"
-  },
-  skyNewsSource: {
-    title: {
-      ar: "مصدر سكاي نيوز",
-      en: "Sky News Source"
-    },
-    description: {
-      ar: "النص الذي يشير إلى أن مصدر الخبر هو سكاي نيوز.",
-      en: "Text indicating that the news source is Sky News."
-    },
-    image: "/images/sky-news-source-example.png"
-  },
-  settings: {
-    title: {
-      ar: "الإعدادات",
-      en: "Settings"
-    },
-    description: {
-      ar: "النص الخاص بقائمة أو زر الإعدادات.",
-      en: "Text for the settings menu or button."
-    },
-    image: "/images/settings-example.png"
-  },
-  horizontalLayout: {
-    title: {
-      ar: "تخطيط أفقي",
-      en: "Horizontal Layout"
-    },
-    description: {
-      ar: "النص الخاص بخيار التبديل إلى التخطيط الأفقي.",
-      en: "Text for the option to switch to a horizontal layout."
-    },
-    image: "/images/horizontal-layout-example.png"
-  },
-  verticalLayout: {
-    title: {
-      ar: "تخطيط عمودي",
-      en: "Vertical Layout"
-    },
-    description: {
-      ar: "النص الخاص بخيار التبديل إلى التخطيط العمودي.",
-      en: "Text for the option to switch to a vertical layout."
-    },
-    image: "/images/vertical-layout-example.png"
-  },
-  fontSize: {
-    title: {
-      ar: "حجم الخط",
-      en: "Font Size"
-    },
-    description: {
-      ar: "النص الخاص بخيار ضبط حجم الخط في التطبيق.",
-      en: "Text for the option to adjust font size in the app."
-    },
-    image: "/images/font-size-example.png"
-  },
-  enableNotifications: {
-    title: {
-      ar: "تفعيل الإشعارات",
-      en: "Enable Notifications"
-    },
-    description: {
-      ar: "النص الخاص بخيار تفعيل أو تعطيل الإشعارات.",
-      en: "Text for the option to enable or disable notifications."
-    },
-    image: "/images/enable-notifications-example.png"
-  },
-  darkMode: {
-    title: {
-      ar: "الوضع الداكن",
-      en: "Dark Mode"
-    },
-    description: {
-      ar: "النص الخاص بخيار التبديل إلى الوضع الداكن.",
-      en: "Text for the option to switch to dark mode."
-    },
-    image: "/images/dark-mode-example.png"
-  },
-  lightMode: {
-    title: {
-      ar: "الوضع الفاتح",
-      en: "Light Mode"
-    },
-    description: {
-      ar: "النص الخاص بخيار التبديل إلى الوضع الفاتح.",
-      en: "Text for the option to switch to light mode."
-    },
-    image: "/images/light-mode-example.png"
-  },
-  primaryColor: {
-    title: {
-      ar: "اللون الأساسي",
-      en: "Primary Color"
-    },
-    description: {
-      ar: "اللون الرئيسي المستخدم في جميع أنحاء التطبيق للعناصر الأساسية.",
-      en: "The main color used throughout the app for key elements."
-    },
-    image: "/images/primary-color-example.png"
-  },
-  secondaryColor: {
-    title: {
-      ar: "اللون الثانوي",
-      en: "Secondary Color"
-    },
-    description: {
-      ar: "اللون الثانوي المستخدم للتأكيدات والعناصر الأقل بروزًا.",
-      en: "The secondary color used for accents and less prominent elements."
-    },
-    image: "/images/secondary-color-example.png"
-  },
-  backgroundColor: {
-    title: {
-      ar: "لون الخلفية",
-      en: "Background Color"
-    },
-    description: {
-      ar: "اللون المستخدم للخلفية الرئيسية للتطبيق.",
-      en: "The color used for the main background of the app."
-    },
-    image: "/images/background-color-example.png"
-  },
-  surfaceColor: {
-    title: {
-      ar: "لون السطح",
-      en: "Surface Color"
-    },
-    description: {
-      ar: "اللون المستخدم لأسطح المكونات، مثل البطاقات.",
-      en: "The color used for surfaces of components, such as cards."
-    },
-    image: "/images/surface-color-example.png"
-  },
-  onPrimaryColor: {
-    title: {
-      ar: "لون النص على الأساسي",
-      en: "On Primary Color"
-    },
-    description: {
-      ar: "اللون المستخدم للنص والأيقونات المعروضة على اللون الأساسي.",
-      en: "The color used for text and icons displayed on top of the primary color."
-    },
-    image: "/images/on-primary-color-example.png"
-  },
-  onSecondaryColor: {
-    title: {
-      ar: "لون النص على الثانوي",
-      en: "On Secondary Color"
-    },
-    description: {
-      ar: "اللون المستخدم للنص والأيقونات المعروضة على اللون الثانوي.",
-      en: "The color used for text and icons displayed on top of the secondary color."
-    },
-    image: "/images/on-secondary-color-example.png"
-  },
-  onBackgroundColor: {
-    title: {
-      ar: "لون النص على الخلفية",
-      en: "On Background Color"
-    },
-    description: {
-      ar: "اللون المستخدم للنص والأيقونات المعروضة على لون الخلفية.",
-      en: "The color used for text and icons displayed on top of the background color."
-    },
-    image: "/images/on-background-color-example.png"
-  },
-  onSurfaceColor: {
-    title: {
-      ar: "لون النص على السطح",
-      en: "On Surface Color"
-    },
-    description: {
-      ar: "اللون المستخدم للنص والأيقونات المعروضة على ألوان الأسطح.",
-      en: "The color used for text and icons displayed on top of surface colors."
-    },
-    image: "/images/on-surface-color-example.png"
-  },
-  darkBackgroundColor: {
-    title: {
-      ar: "لون الخلفية الداكن",
-      en: "Dark Background Color"
-    },
-    description: {
-      ar: "لون الخلفية المستخدم عندما يكون التطبيق في الوضع الداكن.",
-      en: "The background color used when the app is in dark mode."
-    },
-    image: "/images/dark-background-color-example.png"
-  },
-  darkSurfaceColor: {
-    title: {
-      ar: "لون السطح الداكن",
-      en: "Dark Surface Color"
-    },
-    description: {
-      ar: "لون السطح المستخدم للمكونات عندما يكون التطبيق في الوضع الداكن.",
-      en: "The surface color used for components when the app is in dark mode."
-    },
-    image: "/images/dark-surface-color-example.png"
-  },
-  darkPrimaryColor: {
-    title: {
-      ar: "اللون الأساسي الداكن",
-      en: "Dark Primary Color"
-    },
-    description: {
-      ar: "اللون الأساسي المستخدم عندما يكون التطبيق في الوضع الداكن.",
-      en: "The primary color used when the app is in dark mode."
-    },
-    image: "https://c.top4top.io/p_3202ki9e11.png"
-  },
-  darkSecondaryColor: {
-    title: {
-      ar: "اللون الثانوي الداكن",
-      en: "Dark Secondary Color"
-    },
-    description: {
-      ar: "اللون الثانوي المستخدم عندما يكون التطبيق في الوضع الداكن.",
-      en: "The secondary color used when the app is in dark mode."
-    },
-    image: "/images/dark-secondary-color-example.png"
-  }
-};
-
-        window.fieldInfo = fieldInfo;
         let currentLanguage = 'ar';
-
-        function updateTranslations() {
-            document.documentElement.lang = currentLanguage;
-            document.documentElement.dir = currentLanguage === 'ar' ? 'rtl' : 'ltr';
-            const elements = document.querySelectorAll('[id]');
-            elements.forEach(el => {
-                const key = el.id;
-                if (translations[currentLanguage][key]) {
-                    if (el.tagName === 'INPUT') {
-                        el.placeholder = translations[currentLanguage][key];
-                    } else {
-                        el.textContent = translations[currentLanguage][key];
-                    }
-                }
-            });
-        }
 
         function toggleLanguage() {
             currentLanguage = currentLanguage === 'ar' ? 'en' : 'ar';
-            updateTranslations();
+            updateContent();
+            document.documentElement.lang = currentLanguage;
+            document.documentElement.dir = currentLanguage === 'ar' ? 'rtl' : 'ltr';
+        }
+
+        function updateContent() {
+            const elements = document.querySelectorAll('[id]');
+            elements.forEach(el => {
+                if (translations[currentLanguage][el.id]) {
+                    el.textContent = translations[currentLanguage][el.id];
+                }
+            });
         }
 
         function toggleDarkMode() {
             document.body.classList.toggle('dark-mode');
-            const icon = document.querySelector('#modeToggle i');
+            const icon = document.querySelector('.mode-toggle i');
             icon.classList.toggle('fa-moon');
             icon.classList.toggle('fa-sun');
         }
 
-        function showPopup(fieldId) {
-    const popup = document.getElementById('popup');
-    const popupTitle = document.getElementById('popupTitle');
-    const popupDescription = document.getElementById('popupDescription');
-    const popupImage = document.getElementById('popupImage');
-
-    const info = fieldInfo[fieldId];
-    if (info) {
-        popupTitle.textContent = info.title[currentLanguage];
-        popupDescription.textContent = info.description[currentLanguage];
-        if (info.image) {
-            popupImage.src = info.image;
-            popupImage.style.display = 'block';
-        } else {
-            popupImage.style.display = 'none';
-        }
-        popup.style.display = 'flex';
-    }
-}
-
-        function closePopup() {
-            document.getElementById('popup').style.display = 'none';
-        }
-
-        document.getElementById('codeForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            generateCode();
-        });
-
-        function generateCode() {
-            const formData = new FormData(document.getElementById('codeForm'));
-            const newPackageName = formData.get('newPackageName') || 'com.turbo.breakingnews';
-            
-            const code = `
-package ${newPackageName}
-
-
-import androidx.compose.ui.graphics.Color
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
-import androidx.compose.ui.graphics.vector.ImageVector
- object AppStrings {
-    object MainScreen {
-    const val appTitle = "${formData.get('appTitle')}"
-    const val search = "${formData.get('search')}"
-    const val alJazeera = "${formData.get('alJazeera')}"
-    const val egyptNews = "${formData.get('egyptNews')}"
-    const val skyNews = "${formData.get('skyNews')}"
-    const val scrollToTop = "${formData.get('scrollToTop')}"
-
-    val searchIcon: ImageVector = Icons.Default.Search
-    val settingsIcon: ImageVector = Icons.Default.Settings
-    val scrollToTopIcon: ImageVector = Icons.Default.KeyboardArrowUp
- }
-
-  object PermissionScreen {
-    const val permissionRequired = "${formData.get('permissionRequired')}"
-    const val needYourPermission = "${formData.get('needYourPermission')}"
-    const val canYouHelp = "${formData.get('canYouHelp')}"
-    const val permissionGrantedText = "${formData.get('permissionGrantedText')}"
-    const val thankYouRedirecting = "${formData.get('thankYouRedirecting')}"
-    const val permissionExplanation = "${formData.get('permissionExplanation')}"
-    const val grantPermission = "${formData.get('grantPermission')}"
-   }
-
-   object Settings {
-     const val settings = "${formData.get('settings')}"
-     const val horizontalLayout = "${formData.get('horizontalLayout')}"
-     const val verticalLayout = "${formData.get('verticalLayout')}"
-     const val fontSizeStr = "${formData.get('fontSize')}"
-     const val enableNotifications = "${formData.get('enableNotifications')}"
-     const val darkMode = "${formData.get('darkMode')}"
-     const val lightMode = "${formData.get('lightMode')}"
-    }
-
-    object NewsCards {
-     const val removeFromFavorites = "${formData.get('removeFromFavorites')}"
-     const val addToFavorites = "${formData.get('addToFavorites')}"
-     const val share = "${formData.get('share')}"
-     }
-
-    object Notifications {
-     const val loadingNews = "${formData.get('loadingNews')}"
-     }
-
-    object NewsSources {
-     const val alJazeeraSource = "${formData.get('alJazeeraSource')}"
-     const val skyNewsSource = "${formData.get('skyNewsSource')}"
-    }
-
-     object Colors {
-          object Light {
-             val primary = Color(0xFF${formData.get('primaryColor').substring(1)})
-             val secondary = Color(0xFF${formData.get('secondaryColor').substring(1)})
-             val background = Color(0xFF${formData.get('backgroundColor').substring(1)})
-             val surface = Color(0xFF${formData.get('surfaceColor').substring(1)})
-             val onPrimary = Color(0xFF${formData.get('onPrimaryColor').substring(1)})
-             val onSecondary = Color(0xFF${formData.get('onSecondaryColor').substring(1)})
-             val onBackground = Color(0xFF${formData.get('onBackgroundColor').substring(1)})
-             val onSurface = Color(0xFF${formData.get('onSurfaceColor').substring(1)})
-             }
-
-          object Dark {
-             val background = Color(0xFF${formData.get('darkBackgroundColor').substring(1)})
-             val surface = Color(0xFF${formData.get('darkSurfaceColor').substring(1)})
-             val primary = Color(0xFF${formData.get('darkPrimaryColor').substring(1)})
-             val secondary = Color(0xFF${formData.get('darkSecondaryColor').substring(1)})
-             val onPrimary = Color.Black
-             val onSecondary = Color.Black
-             val onBackground = Color.White
-             val onSurface = Color.White
-                    }
-                }
-            }
-            `;
-
-            document.getElementById('generatedCode').textContent = code;
-            Prism.highlightElement(document.getElementById('generatedCode'));
-        }
-
-        document.getElementById('copyBtn').addEventListener('click', function() {
-            const codeElement = document.getElementById('generatedCode');
-            const range = document.createRange();
-            range.selectNode(codeElement);
-            window.getSelection().removeAllRanges();
-            window.getSelection().addRange(range);
-            document.execCommand('copy');
-            window.getSelection().removeAllRanges();
-            alert('تم نسخ الكود!');
-        });
-
-        document.querySelectorAll('input[type="color"]').forEach(input => {
-            input.addEventListener('input', function() {
-                document.getElementById(`${this.id}Preview`).style.backgroundColor = this.value;
-            });
-        });
-
-        document.getElementById('watchVideoBtn').addEventListener('click', function() {
-            const videoContainer = document.getElementById('videoContainer');
-            videoContainer.style.display = videoContainer.style.display === 'none' ? 'block' : 'none';
-        });
-
-        document.getElementById('closeNotificationBtn').addEventListener('click', function() {
-            document.getElementById('notification').style.display = 'none';
-        });
-
-        let lastScrollTop = 0;
-        window.addEventListener('scroll', function() {
-            const currentScrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            if (currentScrollTop > lastScrollTop) {
-                document.getElementById('header').classList.add('hide');
-            } else {
-                document.getElementById('header').classList.remove('hide');
-            }
-            lastScrollTop = currentScrollTop <= 0 ? 0 : currentScrollTop;
-        }, false);
-
-        document.getElementById('menuToggle').addEventListener('click', function() {
-            document.getElementById('navLinks').classList.toggle('active');
-        });
-        document.addEventListener('DOMContentLoaded', function() {
-    document.querySelectorAll('.info-icon').forEach(icon => {
-        icon.addEventListener('click', function() {
-            const fieldId = this.getAttribute('data-field');
-            console.log("Clicked icon for field:", fieldId); // أضف هذا السطر للتصحيح
-            showPopup(fieldId);
-        });
-    });
-});
-        updateTranslations();
+        // Initialize content
+        updateContent();
     </script>
 </body>
 </html>
