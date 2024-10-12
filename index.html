@@ -887,6 +887,27 @@ html[lang="en"] .download-btn:hover i {
     </footer>
 
     <script>
+        function downloadApp() {
+    const fileName = "Breaking news.apk";
+    const filePath = "/Breaking-news/Breaking news.apk";
+
+    // إنشاء عنصر a مؤقت
+    const link = document.createElement('a');
+    link.href = filePath;
+    link.download = fileName;
+
+    // إضافة العنصر للصفحة، النقر عليه، ثم إزالته
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    // عرض رسالة للمستخدم
+    const message = currentLanguage === 'ar' ? 
+        'جارٍ تحميل التطبيق. يرجى التحقق من مجلد التنزيلات الخاص بك.' : 
+        'The app is downloading. Please check your downloads folder.';
+    
+    alert(message);
+}
         let currentLanguage = 'ar';
         const translations = {
             ar: {
