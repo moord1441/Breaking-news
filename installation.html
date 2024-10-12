@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تعليمات التثبيت - خبر عاجل</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1E88E5;
+            --secondary-color: #FFC107;
+            --text-color: #333333;
+            --bg-color: #F5F5F5;
+            --card-bg: #FFFFFF;
+            --header-bg: rgba(255, 255, 255, 0.95);
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        .dark-mode {
+            --primary-color: #64B5F6;
+            --secondary-color: #FFD54F;
+            --text-color: #E0E0E0;
+            --bg-color: #121212;
+            --card-bg: #1E1E1E;
+            --header-bg: rgba(30, 30, 30, 0.95);
+            --shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: var(--transition);
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding-top: 80px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: var(--header-bg);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            text-decoration: none;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-left: 0.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+        }
+
+        .nav-link i {
+            margin-left: 0.5rem;
+        }
+
+        .nav-link:hover {
+            background-color: var(--primary-color);
+            color: var(--card-bg);
+        }
+
+        .lang-toggle {
+            background-color: #FFFFFF;
+            color: #333333;
+            border: 1px solid #CCCCCC;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            transition: var(--transition);
+        }
+
+        .lang-toggle:hover {
+            background-color: #F0F0F0;
+        }
+
+        .lang-toggle i {
+            margin-left: 0.5rem;
+        }
+
+        .mode-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .mode-toggle:hover {
+            color: var(--primary-color);
+        }
+
+        main {
+            padding: 2rem 0;
+        }
+
+        .installation-guide {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+        }
+
+        .warning {
+            background-color: #FFF3CD;
+            border: 1px solid #FFEEBA;
+            color: #856404;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+
+        .installation-steps {
+            list-style-type: none;
+            counter-reset: step-counter;
+            padding-right: 2rem;
+        }
+
+        .installation-steps li {
+            counter-increment: step-counter;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .installation-steps li::before {
+            content: counter(step-counter);
+            position: absolute;
+            right: -2rem;
+            top: 0;
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: bold;
+            padding: 0.2rem 0.7rem;
+            border-radius: 50%;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+            max-width: 100%;
+            margin-top: 2rem;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        h1, h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="container">
+            <a href="index.html" class="logo">
+                <i class="fas fa-newspaper"></i>
+                <span id="logoText">خبر عاجل</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html#features" class="nav-link">
+                    <i class="fas fa-star"></i>
+                    <span id="featuresLink">المميزات</span>
+                </a>
+                <a href="index.html#docs" class="nav-link">
+                    <i class="fas fa-book"></i>
+                    <span id="docsLink">الوثائق</span>
+                </a>
+                <a href="index.html#faq" class="nav-link">
+                    <i class="fas fa-question-circle"></i>
+                    <span id="faqLink">الأسئلة الشائعة</span>
+                </a>
+                <button class="lang-toggle" onclick="toggleLanguage()">
+                    <i class="fas fa-language"></i>
+                    <span id="langText">English</span>
+                </button>
+                <button class="mode-toggle" onclick="toggleDarkMode()">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <section class="installation-guide">
+            <h1 id="pageTitle">تعليمات التثبيت</h1>
+            
+            <div class="warning">
+                <strong id="warningTitle">تنبيه:</strong> <span id="warningText">قبل البدء، تأكد من تحميل وتثبيت Android Studio. يمكنك تحميله من</span> 
+                <a href="https://developer.android.com/studio" target="_blank" id="studioLink">الموقع الرسمي لـ Android Studio</a>.
+            </div>
+
+            <h2 id="instructionsTitle">كيفية إضافة المشروع إلى Android Studio:</h2>
+            <ol class="installation-steps">
+                <li id="step1">افتح Android Studio على جهازك.</li>
+                <li id="step2">انقر على "Open an Existing Project" من الشاشة الرئيسية.</li>
+                <li id="step3">تصفح إلى المجلد الذي قمت بتنزيل مشروع "خبر عاجل" فيه.</li>
+                <li id="step4">حدد مجلد المشروع وانقر على "OK".</li>
+                <li id="step5">انتظر حتى يقوم Android Studio بتحميل وتهيئة المشروع. قد يستغرق هذا بضع دقائق.</li>
+                <li id="step6">بمجرد اكتمال التحميل، انقر على زر "Run" (يشبه زر التشغيل الأخضر) في شريط الأدوات العلوي.</li>
+                <li id="step7">اختر جهازًا افتراضيًا أو جهازًا فعليًا متصلاً لتشغيل التطبيق عليه.</li>
+                <li id="step8">انتظر حتى يتم بناء وتثبيت التطبيق على الجهاز المحدد.</li>
+                <li id="step9">بمجرد اكتمال التثبيت، سيتم تشغيل التطبيق تلقائيًا على الجهاز المحدد.</li>
+            </ol>
+
+            <h2 id="videoTitle">فيديو توضيحي:</h2>
+            <div class="video-container">
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/dummyVideoID" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        const translations = {
+            ar: {
+                logoText: "خبر عاجل",
+                featuresLink: "المميزات",
+                docsLink: "الوثائق",
+                faqLink: "الأسئلة الشائعة",
+                langText: "English",
+                pageTitle: "تعليمات التثبيت",
+                warningTitle: "تنبيه:",
+                warningText: "قبل البدء، تأكد من تحميل وتثبيت Android Studio. يمكنك تحميله من",
+                studioLink: "الموقع الرسمي لـ Android Studio",
+                instructionsTitle: "كيفية إضافة المشروع إلى Android Studio:",
+                step1: "افتح Android Studio على جهازك.",
+                step2: 'انقر على "Open an Existing Project" من الشاشة الرئيسية.',
+                step3: 'تصفح إلى المجلد الذي قمت بتنزيل مشروع "خبر عاجل" فيه.',
+                step4: 'حدد مجلد المشروع وانقر على "OK".',
+                step5: "انتظر حتى يقوم Android Studio بتحميل وتهيئة المشروع. قد يستغرق هذا بضع دقائق.",
+                step6: 'بمجرد اكتمال التحميل، انقر على زر "Run" (يشبه زر التشغيل الأخضر) في شريط الأدوات العلوي.',
+                step7: "اختر جهازًا افتراضيًا أو جهازًا فعليًا متصلاً لتشغيل التطبيق عليه.",
+                step8: "انتظر حتى يتم بناء وتثبيت التطبيق على الجهاز المحدد.",
+                step9: "بمجرد اكتمال التثبيت، سيتم تشغيل التطبيق تلقائيًا على الجهاز المحدد.",
+                videoTitle: "فيديو توضيحي:"
+            },
+            en: {
+                logoText: "Breaking News",
+                featuresLink: "Features",
+                docsLink: "Docs",
+                faqLink: "FAQ",
+                langText: "العربية",
+                pageTitle: "Installation Instructions",
+                warningTitle: "Warning:",
+                warningText: "Before starting, make sure to download and install Android Studio. You can download it from the",
+                studioLink: "official Android Studio website",
+                instructionsTitle: "How to add the project to Android Studio:",
+                step1: "Open Android Studio on your device.",
+                step2: 'Click on "Open an Existing Project" from the main screen.',
+                step3: 'Browse to the folder where you downloaded the "Breaking News" project.',
+                step4: 'Select the project folder and click "OK".',
+                step5: "Wait for Android Studio to load and initialize the project. This may take a few minutes.",
+                step6: 'Once loading is complete, click the "Run" button (looks like a green play button) in the top toolbar.',
+                step7: "Choose a virtual device or a connected physical device to run the app on.",
+                step8: "Wait for the app to build and install on the selected device.",
+                step9: "Once installation is complete, the app will automatically run on the selected device.",
+                videoTitle: "Instructional Video:"
+            }
+        };
+
+        let currentLanguage = 'ar';
+
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'ar' ? 'en' : 'ar';
+            updateContent();
+            document.documentElement.lang = currentLanguage;
+            document.documentElement.dir = currentLanguage === 'ar' ? 'rtl' : 'ltr';
+        }
+
+        function updateContent() {
+            const elements = document.querySelectorAll('[id]');
+            elements.forEach(el => {
+                if (translations[currentLanguage][el.id]) {
+                    el.textContent = translations[currentLanguage][el.id];
+                }
+            });
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            const icon =   document.querySelector('.mode-toggle i');
+            icon.classList.toggle('fa-moon');
+            icon.classList.toggle('fa-sun');
+        }
+
+        // Initialize content
+        updateContent();
+    </script>
+</body>
+</html>
